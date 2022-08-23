@@ -1,6 +1,9 @@
-import React, { FC } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { HEIGHT, PADDING, WIDTH } from '../App';
+import { FC } from 'react';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+interface HeaderProps {
+
+}
 
 const IMAGES: string[] = [
   'https://w7.pngwing.com/pngs/98/702/png-transparent-font-awesome-computer-icons-house-icon-design-house-angle-logo-black.png',
@@ -9,45 +12,32 @@ const IMAGES: string[] = [
   'https://cdn4.iconfinder.com/data/icons/forgen-phone-settings/48/setting-512.png',
 ];
 
-interface FooterProps {
-
-}
-
-const Footer: FC<FooterProps> = ({}) => {
+const Footer: FC<HeaderProps> = ({}) => {
   return (
-    <View style={styles.main}>
+    <View style={styles.container}>
       {IMAGES.map((el, index) =>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {}}
-        >
-          <Image
-            key={index}
-            style={styles.button}
-            source={{
-              uri: el,
-            }}
-          />
+        <TouchableOpacity key={index} style={styles.button} onPress={() => {}}>
+          <Image key={index} style={styles.button} source={{ uri: el }} />
         </TouchableOpacity>)}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  main: {
-    height: 60,
-    alignItems: 'center',
+  container: {
+    flex: 1,
+    width: '100%',
     justifyContent: 'space-around',
+    alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
     marginBottom: 12,
     backgroundColor: 'white',
   },
   button: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   },
-
 });
 
 export default Footer;

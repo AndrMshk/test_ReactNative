@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-interface ServiceItemsProps {
+interface ItemsProps {
 
 }
 
-const items = [
+const servicesItems = [
   {
     title: 'Payments',
     img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Eo_circle_blue_number-1.svg/2048px-Eo_circle_blue_number-1.svg.png',
@@ -20,17 +20,12 @@ const items = [
   },
 ];
 
-const ServiceItems: FC<ServiceItemsProps> = ({}) => {
+export const ServicesItems: FC<ItemsProps> = ({}) => {
   return (
-    <View style={styles.main}>
-      {items.map(el =>
-        <View style={styles.item}>
-          <Image
-            style={styles.img}
-            source={{
-              uri: el.img,
-            }}
-          />
+    <View style={styles.container}>
+      {servicesItems.map((el, index) =>
+        <View style={styles.item} key={index}>
+          <Image style={styles.img} source={{ uri: el.img }} />
           <Text style={styles.title}>{el.title}</Text>
         </View>,
       )}
@@ -39,24 +34,24 @@ const ServiceItems: FC<ServiceItemsProps> = ({}) => {
 };
 
 const styles = StyleSheet.create({
-  main: {
-    height: 50,
-    alignItems: 'center',
+  container: {
+    height: 30,
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row',
-    marginHorizontal: 20,
+    marginHorizontal: 50,
   },
   item: {
-    alignItems: 'center',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   img: {
-    width: 45,
-    height: 45,
+    width: 35,
+    height: 35,
   },
   title: {
-    fontSize: 20
-  }
+    fontSize: 15,
+    marginTop: 10,
+  },
 });
 
-export default ServiceItems;

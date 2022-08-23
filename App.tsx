@@ -1,38 +1,27 @@
-import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
-import Balance from './componants/Balance';
-import Content from './componants/Content';
-import Footer from './componants/Footer';
-import Header from './componants/Header';
-
-export const { height: HEIGHT, width: WIDTH } = Dimensions.get('screen');  // переменные размера экрана которые сам считает нейтив
-export const PADDING = 30;
+import { StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Content from './components/Content';
 
 export default function App() {
 
+  console.log('___');
+
   return (
-    <View style={styles.container}>
+    <LinearGradient style={styles.container} colors={['#f1e9fc', '#fbfcdc']} start={{ x: 1, y: 1 }}>
       <Header />
-      <Balance />
-      <View style={styles.content}>
-        <Content />
-        <Footer />
-      </View>
-    </View>
+      <Content />
+      <Footer />
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-    paddingTop: PADDING,
-    height: HEIGHT,
-    width: WIDTH,
-    backgroundColor: '#fbfbde',
-  },
-  content: {
-    width: WIDTH,
+    paddingTop: 10,
   },
 });
-/////1231231231231231212

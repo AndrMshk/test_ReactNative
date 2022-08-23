@@ -1,17 +1,5 @@
 import React, { FC } from 'react';
-import { Image, SafeAreaView, StatusBar, StyleSheet, Text, View, VirtualizedList } from 'react-native';
-
-interface OperationsItemsProps {
-
-}
-
-type ItemType = {
-  id: number
-  img: string
-  name: string
-  date: string
-  money: number
-}
+import { Image, SafeAreaView, StyleSheet, Text, View, VirtualizedList } from 'react-native';
 
 const DATA: ItemType[] = [
   {
@@ -65,48 +53,51 @@ const DATA: ItemType[] = [
   },
 ];
 
-const Item = (item: { img: string, name: string, date: string, money: number }) => (
+type ItemType = {
+  id: number
+  img: string
+  name: string
+  date: string
+  money: number
+}
+
+const Item: FC<ItemType> = ({money, date, img, name}) => (
   <View style={styles.item}>
     <View style={styles.info}>
-      <Image
-        style={styles.img}
-        source={{
-          uri: item.img,
-        }}
-      />
+      <Image style={styles.img} source={{ uri: img }} />
       <View>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text>{item.date}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text>{date}</Text>
       </View>
     </View>
-    <Text style={styles.money}>-${item.money.toFixed(2)}</Text>
+    <Text style={styles.money}>-${money.toFixed(2)}</Text>
   </View>
 );
 
-const OperationsItems: FC<OperationsItemsProps> = ({}) => {
+type ExpensesItemsPropsType = {
 
+}
+
+
+export const ExpensesItems: FC<ExpensesItemsPropsType> = () => {
   return (
-    <View style={styles.main}>
-      <SafeAreaView style={styles.container}>
-        <VirtualizedList
-          data={DATA}
-          initialNumToRender={4}
-          renderItem={({ item }) => <Item name={item.name} img={item.img} date={item.date} money={item.money} />}
-          keyExtractor={(item: ItemType) => item.id.toString()}
-          getItemCount={data => data.length}
-          getItem={(data: ItemType[], index: number) => (data[index])}
-        />
-      </SafeAreaView>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <VirtualizedList
+        data={DATA}
+        initialNumToRender={4}
+        renderItem={({ item }) => <Item {...item} />}
+        keyExtractor={(item: ItemType) => item.id.toString()}
+        getItemCount={(data => data.length)}
+        getItem={(data, index) => data[index]}
+      />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  main: {
-    marginHorizontal: 16,
-  },
   container: {
-    marginTop: StatusBar.currentHeight,
+    flex: 1,
+    marginHorizontal: 30,
   },
   item: {
     height: 50,
@@ -133,4 +124,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OperationsItems;
